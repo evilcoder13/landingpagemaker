@@ -1,24 +1,27 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 
 namespace landingpagemaker.Models;
 
 public class LandingPage
 {
+
     public LandingPage()
     {
         Description = "";
         Content = "";
         CategoryId = 0;
+;
     }
     [Key]
     public int Id { get; set; }
-    [Required, StringLength(150)]
+    [Required, StringLength(150),NotAllowKeywords]
     public string Name { get; set; }
-    [StringLength(255)]
+    [StringLength(255),NotAllowKeywords]
     public string Description { get; set; }
-    [Required]
+    [Required,NotAllowKeywords]
     public string Content { get; set; }
     public int CategoryId {get;set;} // 0: Template, 1-n: LandingPage
     public int Status { get; set; } // 1: Active, 0: Inactive, 2: Deleted
